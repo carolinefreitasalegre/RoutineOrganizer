@@ -1,4 +1,6 @@
 using Infrastructure.Data;
+using Infrastructure.Interfaces;
+using Infrastructure.Reository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,11 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IFilhoRepository, FilhoRepository>();
+builder.Services.AddScoped<IRotinaRepository, RotinaRepository>();
+builder.Services.AddScoped<ILembreteRepository, LembreteRepository>();
+builder.Services.AddScoped<ITarefaDomesticaRepository, TarefaDomesticaRepository>();
 
 var app = builder.Build();
 
