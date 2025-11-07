@@ -21,31 +21,18 @@ namespace Infrastructure.Reository
         
         public async Task<Lembrete> CriarLembrete(Lembrete lembrete)
         {
-            var novoLmbrete = new Lembrete
-            {
-                Mensagem = lembrete.Mensagem,
-                DataHora = lembrete.DataHora,
-                Visto = lembrete.Visto
-            };
-
-            _context.lembretes.Add(novoLmbrete);
+            _context.lembretes.Add(lembrete);
             await _context.SaveChangesAsync();
-
-            return novoLmbrete;
+            return lembrete;
         }
 
         public async Task<Lembrete> EditarLembrete(Lembrete lembrete)
         {
-            var editarLembrete = await _context.lembretes.FirstOrDefaultAsync(x => x.Id == lembrete.Id);
 
-            editarLembrete.Mensagem = lembrete.Mensagem;
-            editarLembrete.DataHora = lembrete.DataHora;
-            editarLembrete.Visto = lembrete.Visto;
-
-            _context.lembretes.Update(editarLembrete);
+            _context.lembretes.Update(lembrete);
             await _context.SaveChangesAsync();
 
-            return editarLembrete;
+            return lembrete;
 
         }
 

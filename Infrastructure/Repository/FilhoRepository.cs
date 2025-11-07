@@ -20,30 +20,20 @@ namespace Infrastructure.Reository
 
         public async Task<Filho> CriarFilho(Filho filho)
         {
-            var novoFilho = new Filho
-            {
-                Nome = filho.Nome,
-                DataNascimento = filho.DataNascimento
-            };
+            _context.filhos.Add(filho);
+             await _context.SaveChangesAsync();
 
-            _context.filhos.Add(novoFilho);
-            await _context.SaveChangesAsync();
-
-            return novoFilho;
-
+            return filho;
         }
 
         public async Task<Filho> EditarFilho(Filho filho)
         {
-            var editarFilho = await _context.filhos.FirstOrDefaultAsync(x => x.Id == filho.Id);
+            //var editarFilho = await _context.filhos.FirstOrDefaultAsync(x => x.Id == filho.Id);
 
-            editarFilho.Nome = filho.Nome;
-            editarFilho.DataNascimento = filho.DataNascimento;
-
-            _context.filhos.Update(editarFilho);
+            _context.filhos.Update(filho);
             await _context.SaveChangesAsync();
 
-            return editarFilho;
+            return filho;
 
 
         }

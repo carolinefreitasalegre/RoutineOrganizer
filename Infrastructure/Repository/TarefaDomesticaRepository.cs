@@ -23,33 +23,18 @@ namespace Infrastructure.Reository
 
         public async Task<TarefaDomestica> CriarTarefaDomestica(TarefaDomestica tarefa)
         {
-            var novatarefa = new TarefaDomestica
-            {
-                Descricao = tarefa.Descricao,
-                Prioridade = tarefa.Prioridade,
-                DataPrevista = tarefa.DataPrevista,
-                Status = tarefa.Status
-            };
-
-            _context.tarefaDomesticas.Add(novatarefa);
+            _context.tarefaDomesticas.Add(tarefa);
             await _context.SaveChangesAsync();
 
-            return novatarefa;
+            return tarefa;
         }
 
         public async Task<TarefaDomestica> EditarTarefaDomestica(TarefaDomestica tarefa)
         {
-            var editarTarefa = await _context.tarefaDomesticas.FirstOrDefaultAsync(x => x.Id == tarefa.Id);
-
-            editarTarefa.Descricao = tarefa.Descricao;
-            editarTarefa.Prioridade = tarefa.Prioridade;
-            editarTarefa.DataPrevista = tarefa.DataPrevista;
-            editarTarefa.Status = tarefa.Status;
-
-            _context.tarefaDomesticas.Update(editarTarefa);
+            _context.tarefaDomesticas.Update(tarefa);
             await _context.SaveChangesAsync();
 
-            return editarTarefa;
+            return tarefa;
         }
 
         public async Task<List<TarefaDomestica>> TodosTarefas()

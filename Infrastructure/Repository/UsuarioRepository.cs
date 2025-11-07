@@ -19,35 +19,27 @@ namespace Infrastructure.Reository
             return await _context.usuarios.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
+        public async Task<Usuario?> BuscarPorEmail(string email)
+        {
+            return await _context.usuarios.FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+
         public async Task<Usuario> CriarUsuario(Usuario usuario)
         {
-            var novoUsuario = new Usuario
-            {
-                Nome = usuario.Nome,
-                Email = usuario.Email,
-                Senha = usuario.Senha,
-                Filhos = usuario.Filhos,
-                TipoPlano = usuario.TipoPlano,
-            };
-
-            await _context.usuarios.AddAsync(novoUsuario);
-            return novoUsuario;
+            
+            await _context.usuarios.AddAsync(usuario);
+            await _context.SaveChangesAsync();
+            return usuario;
 
         }
 
         public async Task<Usuario> EditarUsuario(Usuario usuario)
         {
-            var editarUsuario = await _context.usuarios.FirstOrDefaultAsync(x => x.Id == usuario.Id);
-            
-            editarUsuario.Nome = usuario.Nome;
-            editarUsuario.Lembretes = usuario.Lembretes;
-            editarUsuario.Senha = usuario.Senha;
-            editarUsuario.TipoPlano = usuario.TipoPlano;
-
-            _context.usuarios.Update(editarUsuario);
+            _context.usuarios.Update(usuario);
             await _context.SaveChangesAsync();
 
-            return editarUsuario;
+            return usuario;
         }
 
         public async Task<List<Usuario>> TodosUsuarios()
