@@ -28,13 +28,6 @@ O projeto tem como objetivo facilitar o controle de tarefas, compromissos e prio
 
 ---
 
-## Como Executar
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/carolinefreitasalegre/RoutineOrganizer.git
-
-
 ## Funcionalidades Planejadas
 
 - Cadastro e edição de tarefas e rotinas
